@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lugou.score.dao.CanShuMapper">
+
+
+    <update id="updateCanShu">
+
+        update  tb_canshu set
+                wuliaomingcheng = #{wuliaomingcheng},
+                xinhao = #{xinhao},
+                sudu = #{sudu},
+                liuliang = #{liuliang},
+                fuhe = #{fuhe},
+                lingdian = #{lingdian},
+                leijiliang = #{leijiliang},
+                xishouxishu = #{xishouxishu},
+                liuliangxianzhi =#{liuliangxianzhi},
+                hengsushuzhi = #{hengsushuzhi},
+                rengonglingdian = #{rengonglingdian},
+                celingshijian = #{celingshijian},
+                kongtaijiexian = #{kongtaijiexian},
+                shifouxuanzhong = #{shifouxuanzhong},
+                yunxingzhuangtai = #{yunxingzhuangtai},
+                banchanliang = #{banchanliang},
+                richanliang = #{richanliang},
+                xunchanliang = #{xunchanliang},
+                yunxingshijian = #{yunxingshijian},
+                yunzaishijian = #{yunzaishijian}
+              where   chenghao = #{chenghao}
+    </update>
+    <!--        &#45;&#45;                 where   chenghao = #{chenghao}-->
+
+    <select id="canshuList" resultType="com.lugou.score.model.CanShuPyModel">
+
+                select * from tb_canshu
+
+        </select>
+
+
+    <select id="queryDayStatement" resultType="java.lang.Integer">
+
+        select count(riqi) from tb_statement where riqi=#{shijian} and chenghao = #{chenghao}
+
+    </select>
+
+    <update id="updateDayStatement">
+
+        update tb_statement set
+            riqi = #{riqi},
+            chenghao = #{chenghao},
+            onechanliang = #{onechanliang},
+            twochanliang = #{twochanliang},
+            threechanliang = #{threechanliang},
+            fourchanliang = #{fourchanliang},
+            oneyunxing = #{oneyunxing},
+            twoyunxing = #{twoyunxing},
+            threeyunxing = #{threeyunxing},
+            fouryunxing = #{fouryunxing},
+            oneyunzai = #{oneyunzai},
+            twoyunzai = #{twoyunzai},
+            threeyunzai = #{threeyunzai},
+            fouryunzai = #{fouryunzai}
+            where riqi = #{riqi}  and chenghao = #{chenghao}
+    </update>
+
+    <insert id="insertDayStatement">
+
+        insert into tb_statement set
+          riqi = #{riqi},
+        chenghao = #{chenghao},
+            onechanliang = #{onechanliang},
+             twochanliang = #{twochanliang},
+              threechanliang = #{threechanliang},
+               fourchanliang = #{fourchanliang},
+               oneyunxing = #{oneyunxing},
+                twoyunxing = #{twoyunxing},
+                 threeyunxing = #{threeyunxing},
+                  fouryunxing = #{fouryunxing},
+                   oneyunzai = #{oneyunzai},
+                    twoyunzai = #{twoyunzai},
+                     threeyunzai = #{threeyunzai},
+                      fouryunzai = #{fouryunzai},
+                      createtime = #{createTime}
+    </insert>
+
+    <select id="getDayStatement" resultType="com.lugou.score.model.BaoBiaoPyModel">
+
+        select  * from tb_statement where riqi =#{riqi}
+
+    </select>
+
+
+    <select id="getMonthStatement" resultType="com.lugou.score.model.BaoBiaoPyModel">
+
+        SELECT * from tb_statement WHERE chenghao = #{chenghao} and createtime BETWEEN #{startDate} and #{endDate}
+
+
+    </select>
+
+    <update id="updateOneChanliang">
+
+        UPDATE tb_statement SET onechanliang = #{onechanliang} WHERE riqi =#{riqi} AND  chenghao = #{chenghao}
+
+    </update>
+
+    <update id="updateTwoChanliang">
+
+        UPDATE tb_statement SET twochanliang = #{twochanliang} WHERE riqi =#{riqi} AND  chenghao = #{chenghao}
+
+    </update>
+
+    <update id="updateThreeChanliang">
+
+        UPDATE tb_statement SET threechanliang = #{threechanliang} WHERE riqi =#{riqi}  AND  chenghao = #{chenghao}
+
+    </update>
+
+
+</mapper>
